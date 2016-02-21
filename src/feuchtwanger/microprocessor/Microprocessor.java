@@ -11,27 +11,12 @@ public class Microprocessor {
 	private String b;
 	private int counter;
 
-	public Microprocessor(File file) {
-		memory = new String[256];
+	public Microprocessor(Memory memory) {
+		this.memory = memory.getMemory();
 		a = "0";
 		b = "0"; // in case b wasn't initialized yet
-
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String memoryString = reader.readLine();
-			memory = memoryString.split("");
-			process();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public Microprocessor(String memory) {
-		this.memory = memory.split("");
-		a = "0";
-		b = "0";
 		process();
+		memory.setMemory(this.memory);
 	}
 
 	private void process() {
